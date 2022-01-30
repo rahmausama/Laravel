@@ -48,8 +48,9 @@ class PostController extends Controller
     {
         //query in db select * from posts where id = $postId
         //return $postId;
+        $post=Post::all()->where('id', $postId);
 
-        return view('posts.show');
+        return view('posts.show', ['post' => $post]);
     }
     public function edit($postId)
     {

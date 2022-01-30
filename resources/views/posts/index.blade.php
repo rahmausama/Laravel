@@ -25,7 +25,7 @@
                 <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
                 <td>{{ $post['created_at'] }}</td>
                 <td>
-                    <a href="/posts/{postId}" class="btn btn-primary">View</a>
+                    <a href="{{ route('posts.show',[$post['id']])}}"class="btn btn-primary">View</a>
                 </td>
                 <td>
                     <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-primary">Edit</a>
