@@ -28,7 +28,7 @@
                     <a href="/posts/{postId}" class="btn btn-primary">View</a>
                 </td>
                 <td>
-                    <a href="/posts/{postId}/edit" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                     <a href="#" class="btn btn-danger">Delete</a>

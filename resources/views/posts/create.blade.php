@@ -18,9 +18,9 @@
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
                 <select name="post_creator" class="form-control">
-                    @foreach ($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
-                    @endforeach
+                @foreach ($users as $user)
+                        <option value="{{$user->id}}">{{$user->name}}</option>
+                @endforeach
                 </select>
             </div>
             
