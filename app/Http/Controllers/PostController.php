@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -16,6 +17,7 @@ class PostController extends Controller
         //     ['title' => 'Second Post', 'posted_by'=> 'Mohamed', 'created_at' => '2022-01-20'],
         //     ['title' => 'Third Post', 'posted_by'=> 'Ali', 'created_at' => '2022-01-20'],
         // ];
+        $allPosts = Post::all();
         $allPosts=Post::paginate(3);
 
         return view('posts.index', [
@@ -31,7 +33,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(StorePostRequest $request)
     {
         // dd('test'); any logic after dd won't be executed
         //the logic to store post in the db
@@ -60,7 +62,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function update($id)
+    public function update($id, StorePostRequest $request)
     {
         $data = request()->all();
         DB::table('posts')->where('id', $id)->update([
