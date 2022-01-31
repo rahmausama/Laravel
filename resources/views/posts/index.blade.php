@@ -31,7 +31,7 @@
                     <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="{{ route('posts.destroy',[$post['id']])}}" class="btn btn-danger">Delete</a>
                 </td>
               </tr>
               @endforeach
