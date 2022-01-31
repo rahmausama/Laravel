@@ -31,8 +31,21 @@
                     <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
-                    <a href="{{ route('posts.destroy',[$post['id']])}}" class="btn btn-danger">Delete</a>
-                </td>
+                    <!-- <a href="{{ route('posts.destroy',[$post['id']])}}" class="btn btn-danger">Delete</a> -->
+                    <a class="btn btn-danger" href="{{ route('posts.index') }}" 
+                   onclick="var message = confirm('Do you want to delete this post ?');
+                   if(message){
+                   event.preventDefault();
+                    document.getElementById(
+                      'delete-form-{{$post->id}}').submit();}">
+                 Delete 
+                </a>
+                  </td>
+                  <form id="delete-form-{{$post->id}}" 
+                  + action="{{route('posts.destroy', $post->id)}}"
+                  method="post">
+                @csrf @method('DELETE')
+            </form>
               </tr>
               @endforeach
             </tbody>

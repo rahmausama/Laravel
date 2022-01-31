@@ -20,7 +20,7 @@
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
                 <select name="post_creator" class="form-control">
-                    <option value="{{$onePost->id}}">{{$onePost->name}}</option>
+                    <option value="{{$onePost->id}}">{{$onePost->user->name}}</option>
                 </select>
             </div>
             @endforeach
