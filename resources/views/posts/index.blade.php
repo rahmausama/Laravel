@@ -23,7 +23,9 @@
                 <th scope="row">{{$post->id}}</th>
                 <td>{{ $post['title'] }}</td>
                 <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
-                <td>{{ $post['created_at'] }}</td>
+                <!-- <td>{{ $post['created_at'] }}</td> -->
+                <td>{{ \Carbon\Carbon::parse($post->created_at)->format('Y-m-d')}}</td>
+
                 <td>
                     <a href="{{ route('posts.show',[$post['id']])}}"class="btn btn-primary">View</a>
                 </td>
@@ -50,5 +52,13 @@
               @endforeach
             </tbody>
           </table>
+          <span>
+                {{$allPosts->links()}}
+              </span>
+              <style>
+                .w-5{
+                  display: none;
+                }
+              </style>
 @endsection
     

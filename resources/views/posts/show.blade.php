@@ -3,6 +3,7 @@
 @section('title') Show @endsection
 
 @section('content')
+
 @foreach ($post as $onePost)
 <div class="card">
   <div class="card-header">
@@ -23,8 +24,8 @@
   <div class="card-body">
     <p class="card-text">Name :- {{$onePost->user->name}}</p>
     <p class="card-text">Email :- {{$onePost->user->email}}</p>
-    <p class="card-text">Created AT :- {{$onePost->user->created_at}}</p>
-
+    <!-- <p class="card-text">Created AT :- {{$onePost->user->created_at}}</p> -->
+    <p class="card-text"> Created at:- {{ \Carbon\Carbon::parse($onePost->user->created_at)->format('Y-m-d')}}</p>
    @endforeach
   </div>
 </div>
