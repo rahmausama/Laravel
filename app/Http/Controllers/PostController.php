@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -42,6 +43,8 @@ class PostController extends Controller
             'title' => $data['title'],
             'description' => $data['description'],
             'user_id' => $data['post_creator'],
+            // 'slug' => Str::slug($data['title'], '-'),
+            'slug'=> Str::of($data['title'])->slug('-'),
         ]);
         return redirect()->route('posts.index');
     }
