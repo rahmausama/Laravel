@@ -43,3 +43,9 @@ Route::get('/auth/callback', function () {
 
     // $user->token
 });
+
+Route::get('auth/google/redirect', 'Auth\GoogleController@redirect');
+Route::get('auth/google/callback', 'Auth\GoogleController@callback');
+
+// Route::get('auth/google', [GoogleController::class,'redirect']);
+// Route::get('auth/google/callback', [GoogleController::class,'callback']);
