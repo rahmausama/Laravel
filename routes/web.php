@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,14 +39,41 @@ Route::get('/auth/redirect', function () {
 
 Route::get('/auth/callback', function () {
     // dd('we are in callback');
-    $user = Socialite::driver('github')->user();
-    dd($user);
+    // $user = Socialite::driver('github')->user();
+    // dd($user);
 
-    // $user->token
+    $githubUser = Socialite::driver('github')->user();
+
+    $user = User::where('github_id', $githubUser->id)->first();
+
+    if ($user) {
+        $user->update([
+            'github_token' => $githubUser->token,
+            'github_refresh_token' => $githubUser->refreshToken,
+        ]);
+    } else {
+        $user = User::create([
+            'name' => $githubUser->name,
+            'email' => $githubUser->email,
+            'password' => $githubUser->token,
+            'github_id' => $githubUser->id,
+            'github_token' => $githubUser->token,
+            'github_refresh_token' => $githubUser->refreshToken,
+        ]);
+    }
+
+    Auth::login($user);
+    return redirect('/posts');
 });
 
-Route::get('auth/google/redirect', 'Auth\GoogleController@redirect');
-Route::get('auth/google/callback', 'Auth\GoogleController@callback');
+Route::get('/auth/google/redirect', function () {
+    return Socialite::driver('google')->redirect();
+})->name('auth.google');
 
-// Route::get('auth/google', [GoogleController::class,'redirect']);
-// Route::get('auth/google/callback', [GoogleController::class,'callback']);
+Route::get('/auth/google/callback', function () {
+    $user = Socialite::driver('google')->user();
+    dd($user);
+});
+
+// Route::get('auth/google/redirect', 'Auth\GoogleController@redirect');
+// Route::get('auth/google/callback', 'Auth\GoogleController@callback');

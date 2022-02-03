@@ -22,6 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
+        'github_id',
+        'github_token',
+        'github_refresh_token',
+        
     ];
 
     /**
