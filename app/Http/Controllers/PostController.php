@@ -18,8 +18,8 @@ class PostController extends Controller
         //     ['title' => 'Second Post', 'posted_by'=> 'Mohamed', 'created_at' => '2022-01-20'],
         //     ['title' => 'Third Post', 'posted_by'=> 'Ali', 'created_at' => '2022-01-20'],
         // ];
-        $allPosts = Post::all();
-        $allPosts=Post::paginate(3);
+        // $allPosts = Post::all();
+        $allPosts=Post::with('user')->paginate(3);
 
         return view('posts.index', [
             'allPosts' => $allPosts
